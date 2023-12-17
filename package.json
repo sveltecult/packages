@@ -1,5 +1,24 @@
 {
-	"name": "packages",
+	"name": "@sveltecult/formdata-validator",
+	"author": "Sveltecult <leader@sveltecult.com>",
+	"description": "A versatile FormData validation library offering a fluent API to ensure data integrity and consistency in web applications.",
+  	"keywords": [
+		"form-data",
+		"validator",
+		"validation",
+		"svelte",
+		"sveltekit",
+		"form-validation",
+		"form-validator"
+	],
+	"repository": {
+    	"type": "git",
+    	"url": "git+https://github.com/sveltecult/packages.git#formdata-validator"
+  	},
+  	"bugs": {
+    	"url": "https://github.com/sveltecult/formdata-validator/issues"
+  	},
+  	"homepage": "https://formdata-validator.sveltecult.com",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
@@ -24,7 +43,7 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0"
+		"file-type": "^18.7.0"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -45,5 +64,8 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"file-type": "^18.7.0"
+	}
 }

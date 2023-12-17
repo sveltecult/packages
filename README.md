@@ -1,58 +1,58 @@
-# create-svelte
+# FormData Validator
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A versatile form data validation library offering a fluent API to ensure data integrity and consistency in web applications. Please note that this project is currently a work in progress and undergoing active development.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Features
 
-## Creating a project
+- Fluent validation API
+- Supports various input types: boolean, date, file, number and string.
+- Array validation using `[]` and `.*` notations
+- Customizable validation rules
+- Framework agnostic
+- With 40+ [available rules](https://formdata-validator.sveltecult.com)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Installation
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To install, use your preferred package manager:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm install @sveltecult/formdata-validator
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Getting Started
 
-## Building
+Detailed instructions on getting started and list of available validation rules can be found in the [documentation](https://formdata-validator.sveltecult.com).
 
-To build your library:
+### Basic Usage
 
-```bash
-npm run package
+```typescript
+import { Rule, Validation } from '@sveltecult/formdata-validator';
+
+/** @type {import('./$types').Actions} */
+export const actions = {
+	default: async ({ request }) => {
+		const formData = await request.formData();
+
+		const validation = new Validation(formData, {
+			email: Rule.string().required().email(),
+			password: Rule.string().required().minLength(8).confirmed()
+		});
+
+		const errors = await validation.errors();
+
+		if (errors.any() === true) {
+			console.log(errors.all());
+		}
+	}
+};
 ```
 
-To create a production version of your showcase app:
+## Writing Custom Validation
 
-```bash
-npm run build
-```
+This library allows writing custom validation logic using the `.custom()` rule for scenarios where standard validation rules don't meet specific requirements, such as database-related checks. [Click here](https://formdata-validator.sveltecult.com/guides/custom) to learn more about how to create your own custom validation.
 
-You can preview the production build with `npm run preview`.
+## License
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+Red is licensed under the MIT License.
