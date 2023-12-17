@@ -55,4 +55,4 @@ This library allows writing custom validation logic using the `.custom()` rule f
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Red is licensed under the MIT License.
+This library is licensed under the MIT License.

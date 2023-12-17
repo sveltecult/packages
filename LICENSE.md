@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2023 [Sveltecult contributors](https://github.com/sveltecult/formdata-validator/graphs/contributors)
+Copyright (c) 2023 [Sveltecult contributors](https://github.com/sveltecult/packages/graphs/contributors)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
