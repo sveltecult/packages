@@ -23,7 +23,7 @@ npm install @sveltecult/formdata-validator
 
 Detailed instructions on getting started and list of available validation rules can be found in the [documentation](https://formdata-validator.sveltecult.com).
 
-### Basic Usage
+## Basic Usage
 
 ```typescript
 import { Rule, Validation } from '@sveltecult/formdata-validator';

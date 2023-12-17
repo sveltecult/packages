@@ -7,18 +7,20 @@
 		"validator",
 		"validation",
 		"form-validation",
-		"form-validator"
+		"form-validator",
+		"form-data-validator",
+		"form-data-validation"
 	],
 	"repository": {
     	"type": "git",
     	"url": "git+https://github.com/sveltecult/packages.git#formdata-validator"
   	},
   	"bugs": {
-    	"url": "https://github.com/sveltecult/formdata-validator/issues"
+    	"url": "https://github.com/sveltecult/packages/issues"
   	},
   	"homepage": "https://formdata-validator.sveltecult.com",
 	"license": "MIT",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
