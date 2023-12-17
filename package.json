@@ -1,6 +1,31 @@
 {
-	"name": "packages",
-	"version": "0.0.1",
+	"name": "@sveltecult/helpers",
+	"version": "0.0.4",
+	"author": "Sveltecult <leader@sveltecult.com>",
+	"description": "Collections of useful number and string helper functions designed to simplify common tasks such as pluralization, email obfuscation, random string generation, and more.",
+	"keywords": [
+		"strings",
+		"random-strings",
+		"random",
+		"obfuscate",
+		"obfuscation",
+		"plural",
+		"pluralization",
+		"inflector",
+		"slug",
+		"slugify",
+		"slugs",
+		"helpers"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sveltecult/packages.git#helpers"
+	  },
+	  "bugs": {
+		"url": "https://github.com/sveltecult/packages/issues"
+	  },
+	  "homepage": "https://github.com/sveltecult/packages/tree/helpers",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -24,7 +49,10 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0"
+		"nanoid": "^5.0.4",
+		"obfuscate-mail": "^1.5.1",
+		"pluralize": "^8.0.0",
+		"slugify": "^1.6.6"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -45,5 +73,12 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@types/pluralize": "^0.0.33",
+		"nanoid": "^5.0.4",
+		"obfuscate-mail": "^1.5.1",
+		"pluralize": "^8.0.0",
+		"slugify": "^1.6.6"
+	}
 }

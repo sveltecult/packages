@@ -1,58 +1,50 @@
-# create-svelte
+# Helpers
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Collections of useful number and string helper functions designed to simplify common tasks such as pluralization, email obfuscation, random string generation, and more.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Installation
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+To install, use your preferred package manager:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm install @sveltecult/helpers
 ```
 
-## Developing
+## Basic Usage
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```typescript
+import { Str, Num } from "@sveltecult/helpers";
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+const id = Str.random();
+const email = Str.obfuscate("john@example.com");
+const plural = Str.pluralize("cat", 3);
+const OTP = Num.random(6);
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Available Helpers:
 
-## Building
+### `Str.pluralize(noun: string, count: number, inclusive?: boolean)`
 
-To build your library:
+Returns the plural form of a word based on the given count.
 
-```bash
-npm run package
-```
+### `Str.obfuscate(text: string, hint?: number)`
 
-To create a production version of your showcase app:
+Obfuscates a text. Useful for hiding sensitive information.
 
-```bash
-npm run build
-```
+### `Str.random(length: number?)`
 
-You can preview the production build with `npm run preview`.
+Generates a random string of the specified length.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### `Str.slugify(text: string, options: object)`
 
-## Publishing
+Slugifies a text.
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+### `Num.random(digits: number?)`
 
-To publish your library to [npm](https://www.npmjs.com):
+Generates a random number with the specified number of digits.
 
-```bash
-npm publish
-```
+## License
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+This library is licensed under the MIT License.
