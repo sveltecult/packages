@@ -1,6 +1,28 @@
 {
-	"name": "packages",
-	"version": "0.0.1",
+	"name": "@sveltecult/sveltekit-crypto",
+	"version": "0.0.2",
+	"author": "Sveltecult <leader@sveltecult.com>",
+	"description": "Collections of useful cryptographic helper functions designed to simplify common tasks such as hashing passwords, encoding and decoding JSON Web Tokens (JWT) for SvelteKit.",
+	"keywords": [
+		"sveltekit",
+		"argon2",
+		"jwt",
+		"encryption",
+		"decryption",
+		"hashing",
+		"hash",
+		"encrypt",
+		"decrypt"
+	],
+	"license": "MIT",
+	"repository": {
+	"type": "git",
+		"url": "git+https://github.com/sveltecult/packages.git#sveltekit-crypto"
+	},
+	"bugs": {
+		"url": "https://github.com/sveltecult/packages/issues"
+	},
+	"homepage": "https://github.com/sveltecult/packages/tree/sveltekit-crypto",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -24,6 +46,8 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
+		"@node-rs/argon2": "^1.5.2",
+		"@node-rs/jsonwebtoken": "^0.2.3",
 		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
@@ -45,5 +69,9 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@node-rs/argon2": "^1.5.2",
+		"@node-rs/jsonwebtoken": "^0.2.3"
+	}
 }

@@ -1,58 +1,58 @@
-# create-svelte
+# SvelteKit Crypto
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Collections of useful cryptographic helper functions designed to simplify common tasks such as hashing passwords, encoding and decoding JSON Web Tokens (JWT) for SvelteKit.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Installation
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+To install, use your preferred package manager:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm install @sveltecult/sveltekit-crypto
 ```
 
-## Developing
+## Getting Started
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To start using this library, you must first set an `APP_KEY` variable to your `.env` file.
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```env
+APP_KEY=
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Basic Usage
 
-## Building
+```typescript
+import { Hash } from "@sveltecult/sveltekit-crypto";
 
-To build your library:
+/** @type {import('./$types').Actions} */
+export const actions = {
+	default: async ({ request, cookies }) => {
+		const hash = await Hash.make('secret');
 
-```bash
-npm run package
+		console.log(hash)
+	}
+};
 ```
 
-To create a production version of your showcase app:
+## Available Helpers:
 
-```bash
-npm run build
-```
+### `Hash.make(password: string, options?: Argon2Options)`
 
-You can preview the production build with `npm run preview`.
+Asynchronously generates a hash for a given password using Argon2.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### `Hash.check(hash: string, password: string, options?: Argon2Options)`
 
-## Publishing
+Asynchronously verifies a password against its hash using Argon2.
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+### `Jwt.encode(claims: Claims, header?: Header, abortSignal?: AbortSignal | undefined | null)`
 
-To publish your library to [npm](https://www.npmjs.com):
+Asynchronously encodes a set of claims into a JSON Web Token (JWT) using a specified header and secret key.
 
-```bash
-npm publish
-```
+### `Jwt.decode(token: string, validation?: Validation, abortSignal?: AbortSignal | undefined | null)`
+
+Asynchronously decodes a JSON Web Token (JWT) using a secret key and performs validation.
+
+## License
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+This library is licensed under the MIT License.
