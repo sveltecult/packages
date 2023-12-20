@@ -5,7 +5,7 @@ export type Resolve = (
 	opts?: ResolveOptions
 ) => MaybePromise<Response>;
 
-export type Middleware = (input: { event: RequestEvent; resolve: Resolve }) => Promise<void>;
+export type Middleware = (event: RequestEvent) => Promise<void>;
 
 export class Router {
 	private routes: any[] = [];
@@ -37,7 +37,7 @@ export class Router {
 		}
 
 		for (const m of route.middleware) {
-			await m(input);
+			await m(event);
 		}
 
 		return resolve(event);

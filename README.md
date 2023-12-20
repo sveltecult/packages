@@ -32,21 +32,21 @@ import { error } from '@sveltejs/kit';
 export async function handle({ event, resolve }) {
 	return new Router()
 		.is('/', [
-			async ({ event, resolve }) => {
+			async (e) => {
 				console.log('middleware 1');
 			},
-			async ({ event, resolve }) => {
+			async (e) => {
 				console.log('middleware 2');
 			}
 		])
-		.is('/auth/login', async ({ event, resolve }) => {
+		.is('/auth/login', async (e) => {
 			console.log('guest middleware');
 		})
 		.is('/admin/users/[id]', [
-			async ({ event, resolve }) => {
+			async (e) => {
 				console.log('auth middleware');
 			},
-			async ({ event, resolve }) => {
+			async (e) => {
 				throw error(403, 'Insufficient privilege');
 			}
 		])
@@ -72,7 +72,7 @@ You can pass the following options to the `.is()` function:
 
 **type:** `Middleware | Middleware[]`
 
-**description:** This parameter accepts either a single middleware function or an array of middleware functions. These functions adhere to the `Middleware` type, which should accept a destructured object containing `{ event, resolve }` and must return a `Promise<void>`.
+**description:** This parameter accepts either a single middleware function or an array of middleware functions. These functions adhere to the `Middleware` type, which should accept an `event` parameter and must return a `Promise<void>`.
 
 ### `.build({ event, resolve })`
 
