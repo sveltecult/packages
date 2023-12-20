@@ -1,6 +1,6 @@
 import type { MaybePromise, RequestEvent, ResolveOptions } from '@sveltejs/kit';
 
-type Resolve = (
+export type Resolve = (
 	event: RequestEvent<Partial<Record<string, string>>, string>,
 	opts?: ResolveOptions
 ) => MaybePromise<Response>;
