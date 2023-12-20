@@ -1,58 +1,55 @@
-# create-svelte
+# About
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This repository contains NPM packages I personally maintain. I merge all of them in one repository to streamline and simplify the maintenance process.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Packages
 
-## Creating a project
+Looking for specific package? Here are all available libraries so far:
 
-If you're seeing this, you've probably already done this step. Congrats!
+### SvelteKit Router
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+This library facilitates per-route multiple middleware for SvelteKit applications. It simplifies middleware management and execution for different routes within your application.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+**Package:** [`@sveltecult/sveltekit-router`](https://www.npmjs.com/package/@sveltecult/sveltekit-router)
 
-## Developing
+**Source Code:** [`sveltekit-router`](https://github.com/sveltecult/packages/tree/sveltekit-router)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### SvelteKit Crypto
 
-```bash
-npm run dev
+Collections of useful cryptographic helper functions designed to simplify common tasks such as hashing passwords, encoding and decoding JSON Web Tokens (JWT) for SvelteKit.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+**Package:** [`@sveltecult/sveltekit-crypto`](https://www.npmjs.com/package/@sveltecult/sveltekit-crypto)
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+**Source Code:** [`sveltekit-crypto`](https://github.com/sveltecult/packages/tree/sveltekit-crypto)
 
-## Building
+### FormData Validator
 
-To build your library:
+A versatile, framework-agnostic form data validation library with expressive syntax.
 
-```bash
-npm run package
-```
+**Package:** [`@sveltecult/formdata-validator`](https://www.npmjs.com/package/@sveltecult/formdata-validator)
 
-To create a production version of your showcase app:
+**Source:** [`formdata-validator`](https://github.com/sveltecult/packages/tree/sveltekit-router)
 
-```bash
-npm run build
-```
+**Documentation:** [`https://formdata-validator.sveltecult.com/`](https://formdata-validator.sveltecult.com/)
 
-You can preview the production build with `npm run preview`.
+### Helpers
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Collections of useful number and string helper functions designed to simplify common tasks such as pluralization, email obfuscation, random string generation, and more.
 
-## Publishing
+**Package:** [`@sveltecult/helpers`](https://www.npmjs.com/package/@sveltecult/helpers)
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+**Source Code:** [`helpers`](https://github.com/sveltecult/packages/tree/helpers)
 
-To publish your library to [npm](https://www.npmjs.com):
+## Contribution and Feedback
 
-```bash
-npm publish
-```
+I welcome contributions, suggestions, and feedback from the community. If you find any issues, have ideas for improvements, or wish to contribute, feel free to submit a pull request or open an issue.
+
+## Get in Touch
+
+You can reach out to me via [`leader@sveltecult.com`](mailto:leader@sveltecult.com) for any inquiries or discussions.
+
+## License
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+Everything is licensed under the MIT License.
