@@ -1,58 +1,85 @@
-# create-svelte
+# SvelteKit Router
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This library facilitates per-route multiple middleware for SvelteKit applications. It simplifies middleware management and execution for different routes within your application.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Why
 
-## Creating a project
+The motivation behind the creation of this library includes:
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Expressive Syntax:** Offers a more expressive syntax compared to manually implementing middleware using conditional logic `(if (event.url.pathname.startsWith('/custom')) {})`.
+- **Single Source of Truth:** Centralizes middleware management within the `hooks.server.ts` file, reducing the need to disperse middleware logic across multiple files.
+- **Promotes Reusability:** Encourages the reuse of middleware functions across various routes, fostering cleaner and more maintainable code.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Caveats
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- **Error Handling:** If an error is thrown within the middleware, the library does not automatically utilize the `error.svelte file`. Instead, you'll need to create a custom error handling file at `src/error.html`.
 
-## Developing
+## Installation
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To install, use your preferred package manager:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm install @sveltecult/sveltekit-router
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Basic Usage
 
-## Building
+```typescript
+import { Router } from '@sveltecult/sveltekit-router';
+import { error } from '@sveltejs/kit';
 
-To build your library:
-
-```bash
-npm run package
+/** @type {import('@sveltejs/kit').Handle} */
+export async function handle({ event, resolve }) {
+	return new Router()
+		.is('/', [
+			async ({ event, resolve }) => {
+				console.log('middleware 1');
+			},
+			async ({ event, resolve }) => {
+				console.log('middleware 2');
+			}
+		])
+		.is('/auth/login', async ({ event, resolve }) => {
+			console.log('guest middleware');
+		})
+		.is('/admin/users/[id]', [
+			async ({ event, resolve }) => {
+				console.log('auth middleware');
+			},
+			async ({ event, resolve }) => {
+				throw error(403, 'Insufficient privilege');
+			}
+		])
+		.build({ event, resolve });
+}
 ```
 
-To create a production version of your showcase app:
+## Available Functions:
 
-```bash
-npm run build
-```
+### `.is(id: string, middleware: Middleware | Middleware[])`
 
-You can preview the production build with `npm run preview`.
+The primary purpose of `.is()` is to attach middleware functions to specific routes. When a request matches a given route, the associated middleware functions defined through `.is()` will be executed in the order they are provided.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+You can pass the following options to the `.is()` function:
 
-## Publishing
+#### `id`
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+**type:** `string`
 
-To publish your library to [npm](https://www.npmjs.com):
+**description:** A string representing the route path or pattern within your application. It can include dynamic segments indicated by square brackets (e.g., `/admin/users/[id]`) to match various paths dynamically.
 
-```bash
-npm publish
-```
+#### `middleware`
+
+**type:** `Middleware | Middleware[]`
+
+**description:** This parameter accepts either a single middleware function or an array of middleware functions. These functions adhere to the `Middleware` type, which should accept a destructured object containing `{ event, resolve }` and must return a `Promise<void>`.
+
+### `.build({ event, resolve })`
+
+The `.build()` function is typically called at the end of defining routes and middleware. It processes the incoming request against the defined routes, identifies the matching route, and then executes the associated middleware functions in the order they were defined using `.is()`. And then return the response using the built-in `resolve(event)` function.
+
+## License
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+This library is licensed under the MIT License.

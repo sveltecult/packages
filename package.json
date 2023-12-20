@@ -1,5 +1,22 @@
 {
-	"name": "packages",
+	"name": "@sveltecult/sveltekit-router",
+	"author": "Sveltecult <leader@sveltecult.com>",
+	"description": "This library facilitates per-route multiple middleware for SvelteKit applications. It simplifies middleware management and execution for different routes within your application.",
+  	"keywords": [
+		"router",
+		"sveltekit",
+		"middleware",
+		"routing"
+	],
+	"repository": {
+    	"type": "git",
+    	"url": "git+https://github.com/sveltecult/packages.git#sveltekit-router"
+  	},
+  	"bugs": {
+    	"url": "https://github.com/sveltecult/packages/issues"
+  	},
+  	"homepage": "https://github.com/sveltecult/packages/tree/sveltekit-router",
+	"license": "MIT",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
