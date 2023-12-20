@@ -28,30 +28,52 @@ npm install @sveltecult/sveltekit-router
 import { Router } from '@sveltecult/sveltekit-router';
 import { error } from '@sveltejs/kit';
 
-/** @type {import('@sveltejs/kit').Handle} */
-export async function handle({ event, resolve }) {
-	return new Router()
-		.is('/', [
-			async (e) => {
-				console.log('middleware 1');
-			},
-			async (e) => {
-				console.log('middleware 2');
-			}
-		])
-		.is('/auth/login', async (e) => {
-			console.log('guest middleware');
-		})
-		.is('/admin/users/[id]', [
-			async (e) => {
-				console.log('auth middleware');
-			},
-			async (e) => {
-				throw error(403, 'Insufficient privilege');
-			}
-		])
-		.build({ event, resolve });
-}
+const router = new Router()
+	.is('/', [
+		async (event) => {
+			console.log('middleware 1');
+		},
+		async (event) => {
+			console.log('middleware 2');
+		}
+	])
+	.is('/auth/login', async (e) => {
+		console.log('guest middleware');
+	})
+	.is('/admin/users/[id]', [
+		async (event) => {
+			console.log('auth middleware');
+		},
+		async (event) => {
+			throw error(403, 'Insufficient privilege');
+		}
+	]);
+
+export const handle = router.build.bind(route);
+```
+
+### Using with the `sequence()` function
+
+Because our router instance is just another `Handle`, you can use the `sequence()` function:
+
+```typescript
+import { Router } from '$lib/index.js';
+import { type Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+
+const router = new Router().is('/', [
+	async (event) => {
+		console.log('do something');
+	}
+]);
+
+const handle2: Handle = ({ event, resolve }) => {
+	console.log('do another thing');
+
+	return resolve(event);
+};
+
+export const handle = sequence(router.build.bind(router), handle2);
 ```
 
 ## Available Functions:

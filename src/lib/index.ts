@@ -1,4 +1,4 @@
-import type { MaybePromise, RequestEvent, ResolveOptions } from '@sveltejs/kit';
+import type { Handle, MaybePromise, RequestEvent, ResolveOptions } from '@sveltejs/kit';
 
 export type Resolve = (
 	event: RequestEvent<Partial<Record<string, string>>, string>,
@@ -27,7 +27,7 @@ export class Router {
 		return this;
 	}
 
-	async build(input: { event: RequestEvent; resolve: Resolve }): Promise<Response> {
+	build: Handle = async (input: { event: RequestEvent; resolve: Resolve }): Promise<Response> => {
 		const { event, resolve } = input;
 
 		const route = this.routes.findLast((route) => route.id === event.route.id);
@@ -41,5 +41,5 @@ export class Router {
 		}
 
 		return resolve(event);
-	}
+	};
 }
