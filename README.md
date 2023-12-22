@@ -52,12 +52,36 @@ const router = new Router()
 export const handle = router.build.bind(route);
 ```
 
+### Grouping routes
+
+If you have routes that share the same middleware, you can use the `.group()` function:
+
+```typescript
+import { Router, RouterGroup } from '@sveltecult/sveltekit-router';
+
+const router = new Router().group(
+	(RouterGroup: RouterGroup) => {
+		RouterGroup.is('/auth/login');
+		RouterGroup.is('/auth/register', async (e) => {
+			console.log('overriding the global guest middleware');
+		});
+	},
+	async (e) => {
+		console.log('guest');
+	}
+);
+
+export const handle = router.build.bind(router);
+```
+
+Our example above was supposed to log `"guest"` for both `/auth/login` and `/auth/register` pages. However, when you pass second argument to `RouterGroup.is('/auth/register')`, it will override its global middleware.
+
 ### Using with the `sequence()` function
 
 Because our router instance is just another `Handle`, you can use the `sequence()` function:
 
 ```typescript
-import { Router } from '$lib/index.js';
+import { Router } from '@sveltecult/sveltekit-router';
 import { type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
@@ -84,7 +108,7 @@ The primary purpose of `.is()` is to attach middleware functions to specific rou
 
 You can pass the following options to the `.is()` function:
 
-#### `id`
+#### `id` (required)
 
 **type:** `string`
 
@@ -96,7 +120,25 @@ You can pass the following options to the `.is()` function:
 
 **description:** This parameter accepts either a single middleware function or an array of middleware functions. These functions adhere to the `Middleware` type, which should accept an `event` parameter and must return a `Promise<void>`.
 
-### `.build({ event, resolve })`
+### `.group(callback: Function, middleware: Middleware | Middleware[])`
+
+The `.group()` function can group routes that share the same middleware.
+
+You can pass the following options to the `.group()` function:
+
+#### `callback` (required)
+
+**type:** `Function`
+
+**description:** A callback containing route definitions with the same middleware.
+
+#### `middleware`
+
+**type:** `Middleware | Middleware[]`
+
+**description:** This will serve as the global middleware for the grouped routes. It accepts either a single middleware function or an array of middleware functions. These functions adhere to the `Middleware` type, which should accept an `event` parameter and must return a `Promise<void>`.
+
+### `.build(input: { event: RequestEvent, resolve: Resolve })`
 
 The `.build()` function is typically called at the end of defining routes and middleware. It processes the incoming request against the defined routes, identifies the matching route, and then executes the associated middleware functions in the order they were defined using `.is()`. And then return the response using the built-in `resolve(event)` function.
 

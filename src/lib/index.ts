@@ -7,17 +7,40 @@ export type Resolve = (
 
 export type Middleware = (event: RequestEvent) => Promise<void>;
 
+export class RouterGroup {
+	private routes: any[] = [];
+
+	private m: Middleware[] = [];
+
+	constructor(callback: Function, middleware: Middleware | Middleware[] = []) {
+		this.m = Array.isArray(middleware) ? middleware : [middleware];
+
+		callback(this);
+	}
+
+	is(id: string, middleware?: Middleware | Middleware[]) {
+		let m: Middleware | Middleware[] = this.m;
+
+		if (middleware) {
+			m = Array.isArray(middleware) ? middleware : [middleware];
+		}
+
+		this.routes.push({
+			id: id,
+			middleware: m
+		});
+	}
+
+	build() {
+		return this.routes;
+	}
+}
+
 export class Router {
 	private routes: any[] = [];
 
 	is(id: string, middleware: Middleware | Middleware[] = []) {
-		let m: Middleware | Middleware[];
-
-		if (Array.isArray(middleware)) {
-			m = middleware;
-		} else {
-			m = [middleware];
-		}
+		let m: Middleware | Middleware[] = Array.isArray(middleware) ? middleware : [middleware];
 
 		this.routes.push({
 			id: id,
@@ -27,8 +50,18 @@ export class Router {
 		return this;
 	}
 
+	group(callback: Function, middleware: Middleware | Middleware[] = []) {
+		const routerGroup = new RouterGroup(callback, middleware).build();
+
+		this.routes.push(...routerGroup);
+
+		return this;
+	}
+
 	build: Handle = async (input: { event: RequestEvent; resolve: Resolve }): Promise<Response> => {
 		const { event, resolve } = input;
+
+		console.log(this.routes);
 
 		const route = this.routes.findLast((route) => route.id === event.route.id);
 
