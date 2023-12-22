@@ -61,8 +61,6 @@ export class Router {
 	build: Handle = async (input: { event: RequestEvent; resolve: Resolve }): Promise<Response> => {
 		const { event, resolve } = input;
 
-		console.log(this.routes);
-
 		const route = this.routes.findLast((route) => route.id === event.route.id);
 
 		if (route === undefined) {
