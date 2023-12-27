@@ -6,6 +6,14 @@ This repository contains NPM packages I personally maintain. I merge all of them
 
 Looking for specific package? Here are all available libraries so far:
 
+### SvelteKit Mailer
+
+This library allows you to send emails with nice and customizable layout and colors. With expressive syntax and simplifies the creation of common components like buttons, codes, paragraphs and more.
+
+**Package:** [`@sveltecult/sveltekit-mailer`](https://www.npmjs.com/package/@sveltecult/sveltekit-mailer)
+
+**Source Code:** [`sveltekit-mailer`](https://github.com/sveltecult/packages/tree/sveltekit-mailer)
+
 ### SvelteKit Router
 
 This library facilitates per-route multiple middleware for SvelteKit applications. It simplifies middleware management and execution for different routes within your application.
