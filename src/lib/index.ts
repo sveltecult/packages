@@ -63,7 +63,7 @@ export class Mail {
 		<html lang="en">
 
 		<body style="background-color::options.colors.body:;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif">
-			<table align="center" role="presentation" cellSpacing="0" cellPadding="0" border="0" width="100%" style="max-width:37.5em;background-color::options.colors.main:;margin:0 auto;padding:20px 0 48px;margin-bottom:64px">
+			<table align="center" role="presentation" cellSpacing="0" cellPadding="0" border="0" width="100%" style="max-width:37.5em;background-color::options.colors.main:;margin:0 auto;padding:20px 0 48px;margin-bottom:64px;border:1px solid #e4e4e7;border-radius:5px;">
 			<tr style="width:100%">
 				<td>
 				<table style="padding:0 48px" align="center" border="0" cellPadding="0" cellSpacing="0" role="presentation" width="100%">
@@ -118,19 +118,19 @@ export class Mail {
 			}
 		},
 		colors: {
-			body: '#f3f4f6',
+			body: '#ffffff',
 			main: '#ffffff',
-			p: '#0f172a',
-			a: '#3b82f6',
-			hr: '#f3f4f6',
+			p: '#09090b',
+			a: '#2563eb',
+			hr: '#e4e4e7',
 			action: {
-				background: '#3b82f6',
-				color: '#ffffff',
+				background: '#09090b',
+				color: '#fafafa',
 				padding: '10px'
 			},
 			code: {
-				background: '#000',
-				color: '#fff',
+				background: '#f4f4f5',
+				color: '#09090b',
 				padding: '10px'
 			}
 		}
@@ -273,14 +273,14 @@ export class Mail {
 			inner: CSSRuleObject;
 		} = {
 			outer: {
-				background: '#f1f5f9',
+				background: this.renderOptions.colors.code.background,
 				'border-radius': '5px',
 				'margin-right': '0px',
 				'margin-bottom': '30px',
 				padding: '43px 23px'
 			},
 			inner: {
-				color: '#111827',
+				color: this.renderOptions.colors.code.color,
 				'font-family': 'monospace',
 				'font-weight': '700',
 				'font-size': '30px',

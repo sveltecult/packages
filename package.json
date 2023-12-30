@@ -1,6 +1,6 @@
 {
 	"name": "@sveltecult/sveltekit-mailer",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "Sveltecult <leader@sveltecult.com>",
 	"description": "This library allows you to send emails with nice and customizable layout and colors. With expressive syntax and simplifies the creation of common components like buttons, codes, paragraphs and more.",
 	"keywords": [
